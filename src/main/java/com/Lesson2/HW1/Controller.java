@@ -9,11 +9,27 @@ public class Controller {
     @Autowired
     Route route;
 
+    @Autowired
+    Service service;
+
+    @Autowired
+    Step step;
+
     @RequestMapping(method = RequestMethod.GET, value = "/testHW1", produces = "text/plain")
     public @ResponseBody
     String callByBean(){
         route.getId();
         route.getSteps();
+
+        step.getId();
+        step.getParamsServiceFrom();
+        step.getParamsServiceTo();
+        step.getServiceFrom();
+        step.getServiceTo();
+
+        service.getId();
+        service.getName();
+        service.getParamsToCall();
 
         System.out.println("OK");
         return route.toString();
