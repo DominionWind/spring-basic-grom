@@ -15,6 +15,11 @@ public class Controller {
     @Autowired
     Step step;
 
+    @RequestMapping(method = RequestMethod.GET, value = "/hi", produces = "text/plain")
+    public @ResponseBody String test(){
+        return "test";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/testHW1", produces = "text/plain")
     public @ResponseBody
     String callByBean(){

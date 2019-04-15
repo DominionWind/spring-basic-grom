@@ -16,14 +16,20 @@
     <bean id = "orderDAO" class="com.OrderDAO">
     </bean>
 
-    <!--<bean id = "Service" class="com.Lesson2.HW1.Service">-->
-    <!--</bean>-->
+    <bean id = "item" class="com.Lesson2.HW2.Item">
+    </bean>
 
-    <!--<bean id = "Step" class="com.Lesson2.HW1.Step">-->
-    <!--</bean>-->
+    <bean id = "itemService" class="com.Lesson2.HW2.ItemServiceImpl">
+    </bean>
 
-    <!--<bean id = "Route" class="com.Lesson2.HW1.Route">-->
-    <!--</bean>-->
+    <bean id = "service" class="com.Lesson2.HW1.Service">
+    </bean>
+
+    <bean id = "step" class="com.Lesson2.HW1.Step">
+    </bean>
+
+    <bean id = "route" class="com.Lesson2.HW1.Route">
+    </bean>
 
 
 </beans>
