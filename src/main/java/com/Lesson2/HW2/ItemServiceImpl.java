@@ -22,7 +22,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item getByName(String name) {
-        return itemRepository.findByName(name);
+        return itemRepository.getByName(name);
     }
 
     @Override

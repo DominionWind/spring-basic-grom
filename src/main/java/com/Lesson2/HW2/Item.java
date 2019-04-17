@@ -13,7 +13,7 @@ public class Item {
     private long id;
     private String name;
     private Date dateCreated;
-    private Date lastDateUpdate;
+    private Date lastUpdatedDate;
     private String description;
 
     @Id
@@ -42,7 +42,7 @@ public class Item {
     @JsonFormat(pattern = "dd.mm.yyyy")
     @Column(name = "LAST_DATE_UPDATE")
     public Date getLastDateUpdate() {
-        return lastDateUpdate;
+        return lastUpdatedDate;
     }
 
     @JsonProperty("Description")
@@ -64,7 +64,7 @@ public class Item {
     }
 
     public void setLastDateUpdate(Date lastDateUpdate) {
-        this.lastDateUpdate = lastDateUpdate;
+        this.lastUpdatedDate = lastDateUpdate;
     }
 
     public void setDescription(String description) {
@@ -77,7 +77,7 @@ public class Item {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", dateCreated=" + dateCreated +
-                ", lastDateUpdate=" + lastDateUpdate +
+                ", lastDateUpdate=" + lastUpdatedDate +
                 ", description='" + description + '\'' +
                 '}';
     }

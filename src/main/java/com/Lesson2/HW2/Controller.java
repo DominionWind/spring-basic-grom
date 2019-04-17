@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 public class Controller {
     @Autowired
     ItemServiceImpl itemService;
-    util util = new util();
+
+    private util util = new util();
 
     @RequestMapping(method = RequestMethod.GET, value = "/testHW2", produces = "text/plain")
     public @ResponseBody
@@ -30,7 +31,7 @@ public class Controller {
     @RequestMapping(method = RequestMethod.PUT, value = "/updateHW2", produces = "application/json")
     public @ResponseBody void doPut(HttpServletRequest req){
         try {
-            itemService.addItem(util.mapper(req));
+            itemService.updateItem(util.mapper(req));
         } catch (Exception e) {
             e.printStackTrace();
         }
