@@ -1,5 +1,8 @@
 package com.Lesson2.HW2;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,25 +20,32 @@ public class Item {
     @SequenceGenerator(name = "ITEM_S", sequenceName = "ITEM_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ITEM_S")
     @Column(name = "ID")
+    @JsonProperty("id")
     public Long getId() {
         return id;
     }
 
     @Column(name = "NAME")
+    @JsonProperty("name")
     public String getName() {
         return name;
     }
 
+    @JsonProperty("DateCreated")
+    @JsonFormat(pattern = "dd.mm.yyyy")
     @Column(name = "DATE_CREATED")
     public Date getDateCreated() {
         return dateCreated;
     }
 
+    @JsonProperty("LastDateUpdate")
+    @JsonFormat(pattern = "dd.mm.yyyy")
     @Column(name = "LAST_DATE_UPDATE")
     public Date getLastDateUpdate() {
         return lastDateUpdate;
     }
 
+    @JsonProperty("Description")
     @Column(name = "DESCRIPTION")
     public String getDescription() {
         return description;
