@@ -9,9 +9,9 @@
 
     <context:component-scan base-package="com"/>
 
-    <bean id = "orderService" class="com.OrderService">
-        <!--constructor-arg name="" value=""-->
-    </bean>
+    <!--<bean id = "orderService" class="com.OrderService">-->
+        <!--&lt;!&ndash;constructor-arg name="" value=""&ndash;&gt;-->
+    <!--</bean>-->
 
     <bean id = "orderDAO" class="com.OrderDAO">
     </bean>
@@ -22,14 +22,14 @@
     <bean id = "itemService" class="com.Lesson2.HW2.ItemServiceImpl">
     </bean>
 
-    <bean id = "service" class="com.Lesson2.HW1.Service">
-    </bean>
+    <!--<bean id = "service" class="com.Lesson2.HW1.Service">-->
+    <!--</bean>-->
 
-    <bean id = "step" class="com.Lesson2.HW1.Step">
-    </bean>
+    <!--<bean id = "step" class="com.Lesson2.HW1.Step">-->
+    <!--</bean>-->
 
-    <bean id = "route" class="com.Lesson2.HW1.Route">
-    </bean>
+    <!--<bean id = "route" class="com.Lesson2.HW1.Route">-->
+    <!--</bean>-->
 
 
 </beans>
