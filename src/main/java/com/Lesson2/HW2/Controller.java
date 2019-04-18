@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
+
+@org.springframework.stereotype.Controller
 public class Controller {
     @Autowired
     ItemServiceImpl itemService;
