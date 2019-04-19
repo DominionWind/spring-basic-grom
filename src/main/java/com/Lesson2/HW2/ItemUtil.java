@@ -1,12 +1,11 @@
 package com.Lesson2.HW2;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class util {
+public class ItemUtil {
 
     public Item mapper(HttpServletRequest req)throws IOException {
         StringBuilder sb = new StringBuilder();
@@ -25,5 +24,4 @@ public class util {
         Item item = mapper.readValue(data, Item.class);
         return item;
     }
-
 }
