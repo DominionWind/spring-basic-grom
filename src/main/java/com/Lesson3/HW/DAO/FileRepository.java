@@ -1,36 +1,55 @@
 package com.Lesson3.HW.DAO;
 
 import com.Lesson3.HW.model.File;
+import com.Lesson3.HW.model.Storage;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import java.util.List;
 
-public class FileRepository extends GeneralRepository<File>{
+public class FileRepository extends GeneralRepository<File> implements FileDAO{
+
+    private String findFilesByStorage = "SELECT * FROM FILE as files WHERE STORAGE_ID = :storage_id";
 
     @Override
-    public File save(File file) {
-        return super.save(file);
+    public File save(Storage storage, File file) {
+        return null;
     }
 
     @Override
-    public File update(File file) {
-        return super.update(file);
+    public File update(Storage storage, File file) {
+        return null;
     }
 
     @Override
-    public void delete(Long id) {
-        super.delete(id);
+    public void delete(Storage storage, Long id) {
+
     }
 
     @Override
-    public File findById(Long id) throws Exception {
-        return super.findById(id);
+    public File findById(Storage storage, Long id) {
+        return null;
     }
 
     @Override
-    public File findByName(String name) throws Exception {
-        return super.findByName(name);
+    public File findByName(Storage storage, String name) {
+        return null;
+    }
+
+    @Override
+    public List<File> getFilesByStorageId(Long id) {
+        return null;
+    }
+
+    public List<File> findFilesByStorage(Storage storage) {
+        try {
+            Session session = createSessionFactory().openSession();
+            return (List<File>) session.createNativeQuery(findFilesByStorage)
+                    .setParameter("storage_id", storage).addEntity(File.class).list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public List<File> getAllItem() {

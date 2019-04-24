@@ -27,7 +27,7 @@ public class FileService {
 
     public void delete(Storage storage, File file) {
         util.checkExist(storage, file);
-        fileRepository.delete(file.getId());
+        fileRepository.delete(storage, file.getId());
     }
 
 }

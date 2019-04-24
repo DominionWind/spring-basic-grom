@@ -1,21 +1,23 @@
 package com.Lesson3.HW.Utils;
 
+import com.Lesson3.HW.DAO.FileRepository;
 import com.Lesson3.HW.model.File;
 import com.Lesson3.HW.model.Storage;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class Util {
-    private SessionFactory sessionFactory;
 
-    private String findFilesByStorage = "SELECT * FROM FILE as files WHERE STORAGE_ID = :storage_id";
+    private FileRepository fileRepository;
+
+    @Autowired
+    public Util(FileRepository fileRepository) {
+        this.fileRepository = fileRepository;
+    }
 
     public boolean checkSize(Storage storage, File file) {
-        List<File> files = findByStorage(storage);
+        List<File> files = fileRepository.findFilesByStorage(storage);
         Long fileSize = null;
         for (File f : files) {
             fileSize += f.getSize();
@@ -36,7 +38,7 @@ public class Util {
     }
 
     public boolean checkExist(Storage storage, File file) {
-        List<File> files = findByStorage(storage);
+        List<File> files = fileRepository.findFilesByStorage(storage);
         for (File f : files) {
             if (f.equals(file)) {
                 return false;
@@ -45,23 +47,29 @@ public class Util {
         return true;
     }
 
-    public List<File> findByStorage(Storage storage) {
+    public boolean checkTotalSize(Storage storageFrom, Storage storageTo) {
+        Long storageToSize = null;
+        Long storageFromSize = null;
+        Long storageToFreeSpace;
 
-        try {
-            Session session = createSessionFactory().openSession();
-            return (List<File>) session.createNativeQuery(findFilesByStorage)
-                    .setParameter("storage_id", storage).addEntity(File.class).list();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        }
-        sessionFactory.close();
-        return null;
-    }
+        List<File> filesFrom = fileRepository.findFilesByStorage(storageFrom);
+        List<File> filesTo = fileRepository.findFilesByStorage(storageTo);
 
-    private SessionFactory createSessionFactory() {
-        if (sessionFactory == null) {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+        for (File f : filesFrom) {
+            storageFromSize += f.getSize();
         }
-        return sessionFactory;
+
+        for (File f : filesTo) {
+            storageToSize += f.getSize();
+        }
+
+        if (storageFromSize != null && storageToSize != null) {
+            storageToFreeSpace = storageTo.getStorageSize() - storageToSize;
+
+            if (storageToFreeSpace >= storageFromSize) {
+                return true;
+            }
+        }
+        return false;
     }
 }

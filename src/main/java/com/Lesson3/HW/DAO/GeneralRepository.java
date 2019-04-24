@@ -8,8 +8,10 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class GeneralRepository<T> {
+
     private Class<T> tClass;
-    private SessionFactory sessionFactory;
+
+    protected SessionFactory sessionFactory;
 
     public final void setClass(Class<T> setClass) {
         this.tClass = setClass;
