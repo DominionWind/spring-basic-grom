@@ -31,14 +31,13 @@
     <bean id="ItemService" class="com.Lesson2.HW2.ItemService">
     </bean>
 
-    <bean id="FileRepository" class="com.Lesson3.HW.DAO.FileRepository">
+    <bean id="FileDAOImpl" class="com.Lesson3.HW.DAO.Repository.FileDAOimpl">
     </bean>
 
-    <bean id="StorageRepository" class="com.Lesson3.HW.DAO.StorageRepository">
+    <bean id="Utils" class="com.Lesson3.HW.Utils.Util">
     </bean>
 
-    <bean id="Util" class="com.Lesson3.HW.Utils.Util">
+    <bean id="FileService" class="com.Lesson3.HW.Service.FileService">
     </bean>
-
 
 </beans>

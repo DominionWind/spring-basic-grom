@@ -1,23 +1,27 @@
 package com.Lesson3.HW.Utils;
 
-import com.Lesson3.HW.DAO.FileRepository;
+import com.Lesson3.HW.DAO.Repository.FileDAOimpl;
 import com.Lesson3.HW.model.File;
 import com.Lesson3.HW.model.Storage;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+//import javax.servlet.http.HttpServletRequest;
+//import java.io.BufferedReader;
+//import java.io.IOException;
 import java.util.List;
 
 public class Util {
 
-    private FileRepository fileRepository;
+    private FileDAOimpl fileDAOimpl;
 
     @Autowired
-    public Util(FileRepository fileRepository) {
-        this.fileRepository = fileRepository;
+    public Util(FileDAOimpl fileDAOimpl) {
+        this.fileDAOimpl = fileDAOimpl;
     }
 
-    public boolean checkSize(Storage storage, File file) {
-        List<File> files = fileRepository.findFilesByStorage(storage);
+    public boolean checkSize(Storage storage, File file) throws Exception {
+        List<File> files = fileDAOimpl.findFilesByStorage(storage);
         Long fileSize = null;
         for (File f : files) {
             fileSize += f.getSize();
@@ -25,35 +29,35 @@ public class Util {
         if ((fileSize += file.getSize()) < storage.getStorageSize()) {
             return true;
         }
-        return false;
+        throw new Exception("Not enough free space in storage " + storage.getId() + " for file " + file.getId());
     }
 
-    public boolean checkFormatSupported(Storage storage, File file) {
+    public boolean checkFormatSupported(Storage storage, File file) throws Exception {
         for (String f : storage.getFormatsSupported()) {
             if (f.equals(file.getFormat())) {
                 return true;
             }
         }
-        return false;
+        throw new Exception("storage " + storage.getId() + " does not support for file format " + file.getId());
     }
 
-    public boolean checkExist(Storage storage, File file) {
-        List<File> files = fileRepository.findFilesByStorage(storage);
+    public boolean checkExist(Storage storage, File file) throws Exception {
+        List<File> files = fileDAOimpl.findFilesByStorage(storage);
         for (File f : files) {
             if (f.equals(file)) {
-                return false;
+                throw new Exception("file " + file.getId() + " is already in storage " + storage.getId());
             }
         }
         return true;
     }
 
-    public boolean checkTotalSize(Storage storageFrom, Storage storageTo) {
+    public boolean checkTotalSize(Storage storageFrom, Storage storageTo) throws Exception {
         Long storageToSize = null;
         Long storageFromSize = null;
         Long storageToFreeSpace;
 
-        List<File> filesFrom = fileRepository.findFilesByStorage(storageFrom);
-        List<File> filesTo = fileRepository.findFilesByStorage(storageTo);
+        List<File> filesFrom = fileDAOimpl.findFilesByStorage(storageFrom);
+        List<File> filesTo = fileDAOimpl.findFilesByStorage(storageTo);
 
         for (File f : filesFrom) {
             storageFromSize += f.getSize();
@@ -70,6 +74,43 @@ public class Util {
                 return true;
             }
         }
-        return false;
+        throw new Exception("Not enough free space in storage " + storageTo.getId()
+                + " for transferAllFiles from storage " + storageFrom.getId());
     }
+
+//    public Storage storageMapper(HttpServletRequest req) throws IOException {
+//        StringBuilder sb = new StringBuilder();
+//        BufferedReader reader = req.getReader();
+//        try {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                sb.append(line).append('\n');
+//            }
+//        } finally {
+//            reader.close();
+//        }
+//        String data = sb.toString();
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        Storage storage = mapper.readValue(data, Storage.class);
+//        return storage;
+//    }
+//
+//    public File fileMapper(HttpServletRequest req) throws IOException {
+//        StringBuilder sb = new StringBuilder();
+//        BufferedReader reader = req.getReader();
+//        try {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                sb.append(line).append('\n');
+//            }
+//        } finally {
+//            reader.close();
+//        }
+//        String data = sb.toString();
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        File file = mapper.readValue(data, File.class);
+//        return file;
+//    }
 }

@@ -1,24 +1,25 @@
-package com.Lesson3.HW.DAO;
+package com.Lesson3.HW.DAO.Repository;
 
-import com.sun.xml.internal.ws.handler.HandlerException;
+import com.Lesson3.HW.DAO.Interfeise.GeneralDAO;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class GeneralRepository<T> {
+public abstract class GeneralDAOImpl<T> implements GeneralDAO<T> {
 
     private Class<T> tClass;
 
-    protected SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
-    public final void setClass(Class<T> setClass) {
+    public void setClass(Class<T> setClass) {
         this.tClass = setClass;
     }
 
-    protected T save(T t) {
-        Session session = null;
+    @Override
+    public T save(T t) {
+        Session session;
         Transaction tr = null;
         try {
             session = createSessionFactory().openSession();
@@ -26,7 +27,7 @@ public class GeneralRepository<T> {
             tr.begin();
             session.save(t);
             tr.commit();
-        } catch (HandlerException e) {
+        } catch (HibernateException e) {
             System.err.println("Save is failed");
             System.err.println(e.getMessage());
 
@@ -35,9 +36,11 @@ public class GeneralRepository<T> {
             }
         }
         return t;
+
     }
 
-    protected T update(T t) {
+    @Override
+    public T update(T t) {
         Session session = null;
         Transaction tr = null;
         try {
@@ -57,7 +60,8 @@ public class GeneralRepository<T> {
         return t;
     }
 
-    protected void delete(Long id) {
+    @Override
+    public void delete(Long id) {
         Session session;
         Transaction tr = null;
         try {
@@ -76,21 +80,11 @@ public class GeneralRepository<T> {
         }
     }
 
-    protected T findById(Long id) throws Exception {
+    public T findById(Long id) {
         try (Session session = createSessionFactory().openSession()) {
             return session.get(tClass, id);
         } catch (HibernateException e) {
             System.err.println("Can`t find by id " + id);
-            System.err.println(e.getMessage());
-        }
-        return null;
-    }
-
-    protected T findByName(String name) throws Exception {
-        try (Session session = createSessionFactory().openSession()) {
-            return session.get(tClass, name);
-        } catch (HibernateException e) {
-            System.err.println("Can`t find by name " + name);
             System.err.println(e.getMessage());
         }
         return null;
@@ -102,4 +96,6 @@ public class GeneralRepository<T> {
         }
         return sessionFactory;
     }
+
+
 }
