@@ -1,4 +1,4 @@
-package com.Lesson3.HW.DAO.Controller;
+package com.Lesson3.HW.Controller;
 
 import com.Lesson3.HW.Service.FileService;
 import com.Lesson3.HW.Utils.Util;
@@ -21,11 +21,11 @@ public class Controller {
         return fileService.getAllFiles().toString();
     }
 
-    public void put(Storage storage, File file) {
+    public void put(Storage storage, File file) throws Exception {
         fileService.put(storage, file);
     }
 
-    public void delete(Storage storage, File file) {
+    public void delete(Storage storage, File file) throws Exception {
         fileService.delete(storage, file);
     }
 
@@ -33,7 +33,7 @@ public class Controller {
         fileService.transferAll(storageFrom, storageTo);
     }
 
-    public void transferFile(Storage storageFrom, Storage storageTo, Long id) {
+    public void transferFile(Storage storageFrom, Storage storageTo, Long id) throws Exception {
         fileService.transferFile(storageFrom, storageTo, id);
     }
 }
