@@ -77,40 +77,4 @@ public class Util {
         throw new Exception("Not enough free space in storage " + storageTo.getId()
                 + " for transferAllFiles from storage " + storageFrom.getId());
     }
-
-//    public Storage storageMapper(HttpServletRequest req) throws IOException {
-//        StringBuilder sb = new StringBuilder();
-//        BufferedReader reader = req.getReader();
-//        try {
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                sb.append(line).append('\n');
-//            }
-//        } finally {
-//            reader.close();
-//        }
-//        String data = sb.toString();
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        Storage storage = mapper.readValue(data, Storage.class);
-//        return storage;
-//    }
-//
-//    public File fileMapper(HttpServletRequest req) throws IOException {
-//        StringBuilder sb = new StringBuilder();
-//        BufferedReader reader = req.getReader();
-//        try {
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                sb.append(line).append('\n');
-//            }
-//        } finally {
-//            reader.close();
-//        }
-//        String data = sb.toString();
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        File file = mapper.readValue(data, File.class);
-//        return file;
-//    }
 }
