@@ -3,12 +3,8 @@ package com.Lesson3.HW.Utils;
 import com.Lesson3.HW.DAO.Repository.FileDAOimpl;
 import com.Lesson3.HW.model.File;
 import com.Lesson3.HW.model.Storage;
-//import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//import javax.servlet.http.HttpServletRequest;
-//import java.io.BufferedReader;
-//import java.io.IOException;
 import java.util.List;
 
 public class Util {
@@ -33,7 +29,7 @@ public class Util {
     }
 
     public boolean checkFormatSupported(Storage storage, File file) throws Exception {
-        for (String f : storage.getFormatsSupported()) {
+        for (String f : storage.getFormatsSupported().split(",")) {
             if (f.equals(file.getFormat())) {
                 return true;
             }

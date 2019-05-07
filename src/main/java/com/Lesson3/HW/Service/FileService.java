@@ -19,15 +19,16 @@ public class FileService {
         this.util = util;
     }
 
-    public File put(Storage storage, File file) throws Exception{
+    public File put(Storage storage, File file) throws Exception {
         util.checkFormatSupported(storage, file);
         util.checkSize(storage, file);
         util.checkExist(storage, file);
         file.setStorage(storage);
+        fileDAOimpl.save(storage, file);
         return file;
     }
 
-    public void delete(Storage storage, File file) throws Exception{
+    public void delete(Storage storage, File file) throws Exception {
         util.checkExist(storage, file);
         fileDAOimpl.delete(storage, file);
     }
@@ -36,7 +37,7 @@ public class FileService {
         fileDAOimpl.transferAll(storageFrom, storageTo);
     }
 
-    public File transferFile(Storage storageFrom, Storage storageTo, Long id) throws Exception{
+    public File transferFile(Storage storageFrom, Storage storageTo, Long id) throws Exception {
         util.checkFormatSupported(storageFrom, fileDAOimpl.findById(id));
         util.checkSize(storageTo, fileDAOimpl.findById(id));
         util.checkExist(storageFrom, fileDAOimpl.findById(id));
@@ -44,7 +45,7 @@ public class FileService {
         return fileDAOimpl.transferFile(storageFrom, storageTo, id);
     }
 
-    public List<File> getAllFiles(){
+    public List<File> getAllFiles() {
         return fileDAOimpl.getAllFiles();
     }
 

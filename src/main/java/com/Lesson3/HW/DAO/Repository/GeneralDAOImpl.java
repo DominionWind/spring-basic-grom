@@ -36,7 +36,6 @@ public abstract class GeneralDAOImpl<T> implements GeneralDAO<T> {
             }
         }
         return t;
-
     }
 
     @Override
@@ -96,6 +95,4 @@ public abstract class GeneralDAOImpl<T> implements GeneralDAO<T> {
         }
         return sessionFactory;
     }
-
-
 }

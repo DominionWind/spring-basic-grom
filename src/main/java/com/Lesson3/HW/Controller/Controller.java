@@ -17,10 +17,6 @@ public class Controller {
         this.util = util;
     }
 
-    public String getAll() {
-        return fileService.getAllFiles().toString();
-    }
-
     public void put(Storage storage, File file) throws Exception {
         fileService.put(storage, file);
     }

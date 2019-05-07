@@ -1,16 +1,14 @@
 package com.Lesson3.HW.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.util.Arrays;
 
 @Entity
 @Table(name = "STORAGE")
 public class Storage {
     private long id;
-    private String[] formatsSupported;
+    private String formatsSupported;
     private String storageCountry;
     private long storageSize;
 
@@ -25,7 +23,7 @@ public class Storage {
 
     @Column(name = "FORMAT_SUPPORTED")
     @JsonProperty("format supported")
-    public String[] getFormatsSupported() {
+    public String getFormatsSupported() {
         return formatsSupported;
     }
 
@@ -45,7 +43,7 @@ public class Storage {
         this.id = id;
     }
 
-    public void setFormatsSupported(String[] formatsSupported) {
+    public void setFormatsSupported(String formatsSupported) {
         this.formatsSupported = formatsSupported;
     }
 
@@ -61,7 +59,7 @@ public class Storage {
     public String toString() {
         return "Storage{" +
                 "id=" + id +
-                ", formatsSupported=" + Arrays.toString(formatsSupported) +
+                ", formatsSupported='" + formatsSupported + '\'' +
                 ", storageCountry='" + storageCountry + '\'' +
                 ", storageSize=" + storageSize +
                 '}';

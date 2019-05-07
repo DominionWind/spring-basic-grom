@@ -79,7 +79,6 @@ public class FileDAOimpl extends GeneralDAOImpl<File> implements FileDAO {
         }
     }
 
-
     @Override
     public File transferFile(Storage storageFrom, Storage storageTo, Long id) {
         Session session;
@@ -109,7 +108,8 @@ public class FileDAOimpl extends GeneralDAOImpl<File> implements FileDAO {
             return (List<File>) session.createNativeQuery(findFilesByStorage)
                     .setParameter("storage_id", storage).addEntity(File.class).list();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            System.err.println("Cant get all files from storage " + storage.getId());
+            System.err.println(e.getMessage());
         }
         return null;
     }
@@ -122,7 +122,7 @@ public class FileDAOimpl extends GeneralDAOImpl<File> implements FileDAO {
             session = createSessionFactory().openSession();
             files = session.createQuery("FROM File").list();
         } catch (HibernateException e) {
-            System.err.println("Cant get all Item");
+            System.err.println("Cant get all files");
             System.err.println(e.getMessage());
         }
         return files;
