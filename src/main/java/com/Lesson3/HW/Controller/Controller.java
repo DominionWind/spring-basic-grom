@@ -1,7 +1,6 @@
 package com.Lesson3.HW.Controller;
 
 import com.Lesson3.HW.Service.FileService;
-import com.Lesson3.HW.Utils.Util;
 import com.Lesson3.HW.model.File;
 import com.Lesson3.HW.model.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Controller {
 
     private FileService fileService;
-    private Util util;
 
     @Autowired
-    public Controller(FileService fileService, Util util) {
+    public Controller(FileService fileService) {
         this.fileService = fileService;
-        this.util = util;
     }
 
     public void put(Storage storage, File file) throws Exception {
@@ -25,7 +22,7 @@ public class Controller {
         fileService.delete(storage, file);
     }
 
-    public void transferAll(Storage storageFrom, Storage storageTo) {
+    public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
         fileService.transferAll(storageFrom, storageTo);
     }
 

@@ -1,6 +1,7 @@
 package com.Lesson3.HW.DAO.Repository;
 
 import com.Lesson3.HW.DAO.Interfeise.GeneralDAO;
+import com.Lesson3.HW.Exeptions.InternalExeption;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,75 +19,68 @@ public abstract class GeneralDAOImpl<T> implements GeneralDAO<T> {
     }
 
     @Override
-    public T save(T t) {
-        Session session;
+    public T save(T t) throws InternalExeption {
         Transaction tr = null;
         try {
-            session = createSessionFactory().openSession();
+            Session session = createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
             session.save(t);
             tr.commit();
         } catch (HibernateException e) {
-            System.err.println("Save is failed");
-            System.err.println(e.getMessage());
-
             if (tr != null) {
                 tr.rollback();
             }
+            System.err.println(e.getMessage());
+            throw new InternalExeption("Can`t save " + getClass().getName());
         }
         return t;
     }
 
     @Override
-    public T update(T t) {
-        Session session = null;
+    public T update(T t) throws InternalExeption {
         Transaction tr = null;
         try {
-            session = createSessionFactory().openSession();
+            Session session = createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
             session.update(t);
             tr.commit();
         } catch (HibernateException e) {
-            System.err.println("Update is failed");
-            System.err.println(e.getMessage());
-
             if (tr != null) {
                 tr.rollback();
             }
+            System.err.println(e.getMessage());
+            throw new InternalExeption("Can`t update " + getClass().getName());
         }
         return t;
     }
 
     @Override
-    public void delete(Long id) {
-        Session session;
+    public void delete(Long id) throws InternalExeption {
         Transaction tr = null;
         try {
-            session = createSessionFactory().openSession();
+            Session session = createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
             session.delete(findById(id));
             tr.commit();
         } catch (Exception e) {
-            System.err.println("Delete is failed");
-            System.err.println(e.getMessage());
-
             if (tr != null) {
                 tr.rollback();
             }
+            System.err.println(e.getMessage());
+            throw new InternalExeption("Can`t delete " + getClass().getName() + " " + id);
         }
     }
 
-    public T findById(Long id) {
+    public T findById(Long id) throws InternalExeption {
         try (Session session = createSessionFactory().openSession()) {
             return session.get(tClass, id);
         } catch (HibernateException e) {
-            System.err.println("Can`t find by id " + id);
             System.err.println(e.getMessage());
+            throw new InternalExeption("Can`t find " + getClass().getName() + " " + id);
         }
-        return null;
     }
 
     public SessionFactory createSessionFactory() {

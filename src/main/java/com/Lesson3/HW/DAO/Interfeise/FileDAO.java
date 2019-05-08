@@ -1,15 +1,16 @@
 package com.Lesson3.HW.DAO.Interfeise;
 
+import com.Lesson3.HW.Exeptions.InternalExeption;
 import com.Lesson3.HW.model.File;
 import com.Lesson3.HW.model.Storage;
 
 import java.util.List;
 
 public interface FileDAO extends GeneralDAO<File> {
-    File save(Storage storage, File file);
-    File delete(Storage storage, File file);
-    void transferAll(Storage storageFrom, Storage storageTo);
-    File transferFile(Storage storageFrom, Storage storageTo, Long id);
+    File save(Storage storage, File file) throws InternalExeption;
+    File delete(Storage storage, File file) throws InternalExeption;
+    void transferAll(Storage storageFrom, Storage storageTo) throws InternalExeption;
+    File transferFile(Storage storageFrom, Storage storageTo, Long id) throws InternalExeption;
     List<File> findFilesByStorage(Storage storage);
     List<File> getAllFiles();
 }

@@ -9,33 +9,31 @@
 
     <context:component-scan base-package="com"/>
 
-    <bean id="orderService" class="com.Lesson2.OrderService">
-        <!--constructor-arg name="" value=""-->
-    </bean>
+    <!--<bean id="orderService" class="com.Lesson2.OrderService">-->
+        <!--&lt;!&ndash;constructor-arg name="" value=""&ndash;&gt;-->
+    <!--</bean>-->
 
-    <bean id="orderDAO" class="com.Lesson2.OrderDAO">
-    </bean>
+    <!--<bean id="orderDAO" class="com.Lesson2.OrderDAO">-->
+    <!--</bean>-->
 
-    <bean id="service" class="com.Lesson2.HW1.Service">
-    </bean>
+    <!--<bean id="service" class="com.Lesson2.HW1.Service">-->
+    <!--</bean>-->
 
-    <bean id="step" class="com.Lesson2.HW1.Step">
-    </bean>
+    <!--<bean id="step" class="com.Lesson2.HW1.Step">-->
+    <!--</bean>-->
 
-    <bean id="route" class="com.Lesson2.HW1.Route">
-    </bean>
+    <!--<bean id="route" class="com.Lesson2.HW1.Route">-->
+    <!--</bean>-->
 
-    <bean id="ItemUtil" class="com.Lesson2.HW2.ItemUtil">
-    </bean>
+    <!--<bean id="ItemUtil" class="com.Lesson2.HW2.ItemUtil">-->
+    <!--</bean>-->
 
-    <bean id="ItemService" class="com.Lesson2.HW2.ItemService">
-    </bean>
+    <!--<bean id="ItemService" class="com.Lesson2.HW2.ItemService">-->
+    <!--</bean>-->
 
     <bean id="FileDAOImpl" class="com.Lesson3.HW.DAO.Repository.FileDAOimpl">
     </bean>
 
-    <bean id="Utils" class="com.Lesson3.HW.Utils.Util">
-    </bean>
 
     <bean id="FileService" class="com.Lesson3.HW.Service.FileService">
     </bean>
