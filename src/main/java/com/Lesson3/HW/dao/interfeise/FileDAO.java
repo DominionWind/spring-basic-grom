@@ -1,6 +1,6 @@
-package com.Lesson3.HW.DAO.Interfeise;
+package com.Lesson3.HW.dao.interfeise;
 
-import com.Lesson3.HW.Exeptions.InternalExeption;
+import com.Lesson3.HW.exeptions.InternalExeption;
 import com.Lesson3.HW.model.File;
 import com.Lesson3.HW.model.Storage;
 

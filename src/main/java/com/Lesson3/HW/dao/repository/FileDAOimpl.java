@@ -1,15 +1,18 @@
-package com.Lesson3.HW.DAO.Repository;
+package com.Lesson3.HW.dao.repository;
 
-import com.Lesson3.HW.DAO.Interfeise.FileDAO;
-import com.Lesson3.HW.Exeptions.InternalExeption;
+import com.Lesson3.HW.dao.interfeise.FileDAO;
+import com.Lesson3.HW.exeptions.InternalExeption;
 import com.Lesson3.HW.model.File;
 import com.Lesson3.HW.model.Storage;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
+@javax.transaction.Transactional
 public class FileDAOimpl extends GeneralDAOImpl<File> implements FileDAO {
 
     private String findFilesByStorage = "SELECT * FROM FILE WHERE STORAGE_ID = :storage_id";

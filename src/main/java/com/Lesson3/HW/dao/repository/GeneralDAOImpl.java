@@ -1,13 +1,16 @@
-package com.Lesson3.HW.DAO.Repository;
+package com.Lesson3.HW.dao.repository;
 
-import com.Lesson3.HW.DAO.Interfeise.GeneralDAO;
-import com.Lesson3.HW.Exeptions.InternalExeption;
+import com.Lesson3.HW.dao.interfeise.GeneralDAO;
+import com.Lesson3.HW.exeptions.InternalExeption;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@javax.transaction.Transactional
 public abstract class GeneralDAOImpl<T> implements GeneralDAO<T> {
 
     private Class<T> tClass;

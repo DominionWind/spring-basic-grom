@@ -1,8 +1,11 @@
-package com.Lesson3.HW.DAO.Repository;
+package com.Lesson3.HW.dao.repository;
 
-import com.Lesson3.HW.Exeptions.InternalExeption;
+import com.Lesson3.HW.exeptions.InternalExeption;
 import com.Lesson3.HW.model.Storage;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@javax.transaction.Transactional
 public class StorageDAOimpl extends GeneralDAOImpl<Storage> {
 
     public StorageDAOimpl() {

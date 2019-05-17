@@ -1,13 +1,15 @@
 package com.Lesson3.HW.Service;
 
-import com.Lesson3.HW.Exeptions.BadRequestException;
-import com.Lesson3.HW.DAO.Repository.FileDAOimpl;
+import com.Lesson3.HW.exeptions.BadRequestException;
+import com.Lesson3.HW.dao.repository.FileDAOimpl;
 import com.Lesson3.HW.model.File;
 import com.Lesson3.HW.model.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class FileService {
 
     private FileDAOimpl fileDAOimpl;

@@ -1,10 +1,11 @@
-package com.Lesson3.HW.Controller;
+package com.Lesson3.HW.controller;
 
 import com.Lesson3.HW.Service.FileService;
 import com.Lesson3.HW.model.File;
 import com.Lesson3.HW.model.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@org.springframework.stereotype.Controller
 public class Controller {
 
     private FileService fileService;
