@@ -21,7 +21,7 @@ public class Storage {
         return id;
     }
 
-    @Column(name = "FORMAT_SUPPORTED")
+    @Column(name = "FORMATS_SUPPORTED")
     @JsonProperty("format supported")
     public String getFormatsSupported() {
         return formatsSupported;

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "FILE")
+@Table(name = "FILES")
 
 public class File {
     private long id;
@@ -36,7 +36,7 @@ public class File {
         return format;
     }
 
-    @Column(name = "SIZE")
+    @Column(name = "FILE_SIZE")
     @JsonProperty("size")
     public long getSize() {
         return size;
