@@ -15,7 +15,11 @@ import java.util.List;
 @javax.transaction.Transactional
 public class FileDAOimpl extends GeneralDAOImpl<File> implements FileDAO {
 
-    private String findFilesByStorage = "SELECT * FROM FILE WHERE STORAGE_ID = :storage_id";
+    public FileDAOimpl(){
+        setClass(File.class);
+    }
+
+    private String findFilesByStorage = "SELECT * FROM FILE WHERE STORAGE_ID = ?";
 
     @Override
     public File save(Storage storage, File file) throws InternalExeption {
@@ -102,7 +106,7 @@ public class FileDAOimpl extends GeneralDAOImpl<File> implements FileDAO {
         try {
             Session session = createSessionFactory().openSession();
             return (List<File>) session.createNativeQuery(findFilesByStorage)
-                    .setParameter("storage_id", storage).addEntity(File.class).list();
+                    .setParameter(1, storage).addEntity(File.class).list();
         } catch (HibernateException e) {
             System.err.println("Cant get all files from storage " + storage.getId());
             System.err.println(e.getMessage());

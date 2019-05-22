@@ -4,8 +4,18 @@ import com.Lesson3.HW.controller.Controller;
 import com.Lesson3.HW.model.File;
 import com.Lesson3.HW.model.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Demo {
+
+    private static Controller controller;
+
+    @Autowired
+    private Demo(Controller controller){
+        Demo.controller = controller;
+    }
+
     public static void main(String[] args) throws Exception {
 
         Storage storageFrom = new Storage();
@@ -28,13 +38,6 @@ public class Demo {
         file.setName("test");
         file.setSize(5);
 
-        controller.transferAll(storageFrom,storageTo);
-    }
-
-    private static Controller controller;
-
-    @Autowired
-    public Demo(Controller controller) {
-        this.controller = controller;
+        controller.delete(storageTo, file);
     }
 }
