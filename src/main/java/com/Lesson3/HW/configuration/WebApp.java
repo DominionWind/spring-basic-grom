@@ -15,7 +15,7 @@ public class WebApp implements WebApplicationInitializer {
     public void onStartup(ServletContext container) throws ServletException {
         AnnotationConfigWebApplicationContext context
                 = new AnnotationConfigWebApplicationContext();
-        context.setConfigLocation("com.example.app.config");
+        context.setConfigLocation("com");
 
         container.addListener(new ContextLoaderListener(context));
 

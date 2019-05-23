@@ -30,10 +30,4 @@ public class AppConfig {
     public Controller controller() {
         return new Controller(fileService());
     }
-
-//    @Bean
-//    public Demo demo() {
-//        return new Demo(controller());
-//    }
-
 }
