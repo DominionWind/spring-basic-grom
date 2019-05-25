@@ -6,8 +6,11 @@ import com.Lesson3.HW.dao.repository.FileDAOimpl;
 import com.Lesson3.HW.dao.repository.StorageDAOimpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 
 @org.springframework.context.annotation.Configuration
+@EnableWebMvc
 @ComponentScan("com")
 public class AppConfig {
 
@@ -26,8 +29,8 @@ public class AppConfig {
         return new FileService(fileDAOimpl());
     }
 
-    @Bean (name = "Controller")
-    public Controller controller() {
-        return new Controller(fileService());
-    }
+//    @Bean (name = "Controller")
+//    public Controller controller() {
+//        return new Controller(fileService());
+//    }
 }
