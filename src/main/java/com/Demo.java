@@ -1,10 +1,10 @@
 //package com.Lesson3.HW;
 //
-//import com.Lesson3.HW.Service.FileService;
+//import FileService;
 //import com.Lesson3.HW.controller.Controller;
-//import com.Lesson3.HW.dao.repository.FileDAOimpl;
-//import com.Lesson3.HW.model.File;
-//import com.Lesson3.HW.model.Storage;
+//import FileDAOimpl;
+//import File;
+//import Storage;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;

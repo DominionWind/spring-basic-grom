@@ -1,6 +1,6 @@
-package com.Lesson3.HW.dao.interfeise;
+package com.dao.interfeise;
 
-import com.Lesson3.HW.exeptions.InternalExeption;
+import com.exeptions.InternalExeption;
 import org.hibernate.SessionFactory;
 
 public interface GeneralDAO<T> {

@@ -1,9 +1,9 @@
-package com.Lesson3.HW.dao.repository;
+package com.dao.repository;
 
-import com.Lesson3.HW.dao.interfeise.FileDAO;
-import com.Lesson3.HW.exeptions.InternalExeption;
-import com.Lesson3.HW.model.File;
-import com.Lesson3.HW.model.Storage;
+import com.dao.interfeise.FileDAO;
+import com.exeptions.InternalExeption;
+import com.model.File;
+import com.model.Storage;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

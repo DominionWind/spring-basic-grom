@@ -1,0 +1,43 @@
+package com.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class MainController {
+
+//    private FileService fileService;
+//
+//    @Autowired
+//    public MainController(FileService fileService){
+//        this.fileService = fileService;
+//    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/", produces = "text/plain")
+    public @ResponseBody String test1(){
+        return "test";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/hi", produces = "text/plain")
+    public @ResponseBody String test(){
+        return "test";
+    }
+
+//    public void put(Storage storage, File file) throws Exception {
+//        fileService.put(storage, file);
+//    }
+//
+//    public void delete(Storage storage, File file) throws Exception {
+//        fileService.delete(storage, file);
+//    }
+//
+//    public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
+//        fileService.transferAll(storageFrom, storageTo);
+//    }
+//
+//    public void transferFile(Storage storageFrom, Storage storageTo, Long id) throws Exception {
+//        fileService.transferFile(storageFrom, storageTo, id);
+//    }
+}

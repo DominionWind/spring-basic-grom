@@ -1,7 +1,7 @@
-package com.Lesson3.HW.dao.repository;
+package com.dao.repository;
 
-import com.Lesson3.HW.exeptions.InternalExeption;
-import com.Lesson3.HW.model.Storage;
+import com.exeptions.InternalExeption;
+import com.model.Storage;
 import org.springframework.stereotype.Repository;
 
 @Repository

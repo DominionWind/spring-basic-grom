@@ -11,7 +11,7 @@
         <property name="hibernate.connection.username">main</property>
         <property name="hibernate.connection.password">Utarasta287</property>
 
-        <mapping class="com.Lesson3.HW.model.File"/>
-        <mapping class="com.Lesson3.HW.model.Storage"/>
+        <mapping class="com.model.File"/>
+        <mapping class="com.model.Storage"/>
     </session-factory>
 </hibernate-configuration>
