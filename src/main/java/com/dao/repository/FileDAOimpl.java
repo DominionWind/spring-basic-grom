@@ -19,7 +19,7 @@ public class FileDAOimpl extends GeneralDAOImpl<File> implements FileDAO {
         setClass(File.class);
     }
 
-    private String findFilesByStorage = "SELECT * FROM FILE WHERE STORAGE_ID = ?";
+    private String findFilesByStorage = "SELECT * FROM FILES WHERE STORAGE_ID = ?";
 
     @Override
     public File save(Storage storage, File file) throws InternalExeption {
@@ -115,8 +115,8 @@ public class FileDAOimpl extends GeneralDAOImpl<File> implements FileDAO {
     }
 
     @Override
-    public List<File> getAllFiles() {
-        List<File> files = null;
+    public List getAllFiles() {
+        List files = null;
         try {
             Session session = createSessionFactory().openSession();
             files = session.createQuery("FROM File").list();

@@ -49,7 +49,7 @@ public class FileService {
         return fileDAOimpl.transferFile(storageFrom, storageTo, id);
     }
 
-    public List<File> getAllFiles() {
+    public List getAllFiles() {
         return fileDAOimpl.getAllFiles();
     }
 

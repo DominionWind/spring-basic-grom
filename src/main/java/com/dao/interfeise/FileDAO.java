@@ -12,5 +12,5 @@ public interface FileDAO extends GeneralDAO<File> {
     void transferAll(Storage storageFrom, Storage storageTo) throws InternalExeption;
     File transferFile(Storage storageFrom, Storage storageTo, Long id) throws InternalExeption;
     List<File> findFilesByStorage(Storage storage);
-    List<File> getAllFiles();
+    List getAllFiles();
 }

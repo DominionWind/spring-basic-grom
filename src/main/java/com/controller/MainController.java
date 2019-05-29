@@ -1,43 +1,92 @@
 package com.controller;
 
+import com.Service.FileService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.model.File;
+import com.model.Storage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+
 @Controller
 public class MainController {
 
-//    private FileService fileService;
-//
-//    @Autowired
-//    public MainController(FileService fileService){
-//        this.fileService = fileService;
-//    }
+    private FileService fileService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/", produces = "text/plain")
-    public @ResponseBody String test1(){
-        return "test";
+    @Autowired
+    public MainController(FileService fileService){
+        this.fileService = fileService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/hi", produces = "text/plain")
-    public @ResponseBody String test(){
-        return "test";
+    @RequestMapping(method = RequestMethod.GET, value = "/getFiles", produces = "text/plain")
+    public @ResponseBody
+    String getFiles() {
+        return fileService.getAllFiles().toString();
     }
 
-//    public void put(Storage storage, File file) throws Exception {
-//        fileService.put(storage, file);
-//    }
-//
-//    public void delete(Storage storage, File file) throws Exception {
-//        fileService.delete(storage, file);
-//    }
-//
-//    public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
-//        fileService.transferAll(storageFrom, storageTo);
-//    }
-//
-//    public void transferFile(Storage storageFrom, Storage storageTo, Long id) throws Exception {
-//        fileService.transferFile(storageFrom, storageTo, id);
-//    }
+    @RequestMapping(method = RequestMethod.POST, value = "/saveHW3", produces = "application/json")
+    public @ResponseBody
+    void doPost(HttpServletRequest storage, HttpServletRequest file) {
+        try {
+            fileService.put(storageMapper(storage), fileMapper(file));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/transferAll", produces = "application/json")
+    public @ResponseBody
+    void doPut(HttpServletRequest storageFrom, HttpServletRequest storageTo) {
+        try {
+            fileService.transferAll(storageMapper(storageFrom), storageMapper(storageTo));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/transferFile", produces = "application/json")
+    public @ResponseBody
+    void doPut(HttpServletRequest storageFrom, HttpServletRequest storageTo, HttpServletRequest file ) {
+        try {
+            fileService.transferFile(storageMapper(storageFrom), storageMapper(storageTo), fileMapper(file).getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteHW3", produces = "text/plain")
+    public @ResponseBody
+    void doDelete(HttpServletRequest req1, HttpServletRequest req2) {
+        try {
+            fileService.delete(storageMapper(req1), fileMapper(req2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private File fileMapper(HttpServletRequest req) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(mapperObject(req), File.class);
+    }
+
+    private Storage storageMapper(HttpServletRequest req) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(mapperObject(req), Storage.class);
+    }
+
+    private String mapperObject(HttpServletRequest req) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader reader = req.getReader()) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append('\n');
+            }
+        }
+        return sb.toString();
+    }
 }
