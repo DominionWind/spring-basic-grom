@@ -1,8 +1,13 @@
 package com.controller;
 
 import com.Service.FileService;
+import com.Utils;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.model.File;
+import com.model.Response;
 import com.model.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +17,20 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 @Controller
-public class MainController {
+public class MainController<T> {
 
     private FileService fileService;
+    private Utils utils;
 
     @Autowired
-    public MainController(FileService fileService){
+    public MainController(FileService fileService) {
         this.fileService = fileService;
     }
 
@@ -29,11 +40,11 @@ public class MainController {
         return fileService.getAllFiles().toString();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/saveHW3", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, value = "/saveFileInStorage", produces = "application/json")
     public @ResponseBody
-    void doPost(HttpServletRequest storage, HttpServletRequest file) {
+    void doPostFile(HttpServletRequest request) {
         try {
-            fileService.put(storageMapper(storage), fileMapper(file));
+            System.out.println(mapperObject(request));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,42 +52,41 @@ public class MainController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/transferAll", produces = "application/json")
     public @ResponseBody
-    void doPut(HttpServletRequest storageFrom, HttpServletRequest storageTo) {
+    void doPutStorage(HttpServletRequest request) {
         try {
-            fileService.transferAll(storageMapper(storageFrom), storageMapper(storageTo));
+            fileService.transferAll(utils.storageMapper(request), utils.storageMapper(request));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/transferFile", produces = "application/json")
-    public @ResponseBody
-    void doPut(HttpServletRequest storageFrom, HttpServletRequest storageTo, HttpServletRequest file ) {
-        try {
-            fileService.transferFile(storageMapper(storageFrom), storageMapper(storageTo), fileMapper(file).getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    @RequestMapping(method = RequestMethod.PUT, value = "/transferFile", produces = "application/json")
+//    public @ResponseBody
+//    void doPut(HttpServletRequest request) {
+//        try {
+//            fileService.transferFile(utils.storageMapper(request), utils.storageMapper(request), utils.fileMapper(file).getId());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteHW3", produces = "text/plain")
     public @ResponseBody
     void doDelete(HttpServletRequest req1, HttpServletRequest req2) {
         try {
-            fileService.delete(storageMapper(req1), fileMapper(req2));
+            fileService.delete(utils.storageMapper(req1), utils.fileMapper(req2));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private File fileMapper(HttpServletRequest req) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(mapperObject(req), File.class);
-    }
+    @RequestMapping(method = RequestMethod.GET, value = "/jsonToString", produces = "text/plain")
+    public @ResponseBody
+    void testJsonString(HttpServletRequest req) throws Exception {
+//        System.out.println(mapperObject(req));
+//        System.out.println(response(req));
+        System.out.println(fileFromJson(req)+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-    private Storage storageMapper(HttpServletRequest req) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(mapperObject(req), Storage.class);
     }
 
     private String mapperObject(HttpServletRequest req) throws Exception {
@@ -88,5 +98,26 @@ public class MainController {
             }
         }
         return sb.toString();
+    }
+
+    private Map fileFromJson(HttpServletRequest request) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        String string = mapperObject(request);
+
+
+        // convert JSON string to Map
+        Map<String, String> map = mapper.readValue(string, Map.class);
+
+        // it works
+        //Map<String, String> map = mapper.readValue(json, new TypeReference<Map<String, String>>() {});
+
+        System.out.println(map);
+
+        return map;
+    }
+
+    private Response response(HttpServletRequest req) throws Exception {
+        String json = mapperObject(req);
+        return new Gson().fromJson(json, Response.class);
     }
 }
