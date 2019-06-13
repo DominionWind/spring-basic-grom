@@ -1,8 +1,8 @@
-package com.dao.interfeise;
+package com.Lesson3.dao.interfeise;
 
-import com.exeptions.InternalExeption;
-import com.model.File;
-import com.model.Storage;
+import com.Lesson3.exeptions.InternalExeption;
+import com.Lesson3.model.File;
+import com.Lesson3.model.Storage;
 
 import java.util.List;
 

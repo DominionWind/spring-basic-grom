@@ -1,9 +1,9 @@
-package com.Service;
+package com.Lesson3.Service;
 
-import com.exeptions.BadRequestException;
-import com.dao.repository.FileDAOimpl;
-import com.model.File;
-import com.model.Storage;
+import com.Lesson3.exeptions.BadRequestException;
+import com.Lesson3.dao.repository.FileDAOimpl;
+import com.Lesson3.model.File;
+import com.Lesson3.model.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

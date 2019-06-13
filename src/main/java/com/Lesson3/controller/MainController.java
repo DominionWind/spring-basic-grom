@@ -1,14 +1,9 @@
-package com.controller;
+package com.Lesson3.controller;
 
-import com.Service.FileService;
-import com.Utils;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.Lesson3.Service.FileService;
+import com.Lesson3.Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.model.File;
-import com.model.Response;
-import com.model.Storage;
+import com.Lesson3.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +12,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 @Controller
@@ -85,7 +76,8 @@ public class MainController<T> {
     void testJsonString(HttpServletRequest req) throws Exception {
 //        System.out.println(mapperObject(req));
 //        System.out.println(response(req));
-        System.out.println(fileFromJson(req)+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(stringFromJson(req) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(response(req).getFile() + "&&&&&&&&&&&&&&");
 
     }
 
@@ -100,24 +92,18 @@ public class MainController<T> {
         return sb.toString();
     }
 
-    private Map fileFromJson(HttpServletRequest request) throws Exception {
+    private Map stringFromJson(HttpServletRequest request) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         String string = mapperObject(request);
-
-
-        // convert JSON string to Map
         Map<String, String> map = mapper.readValue(string, Map.class);
-
-        // it works
-        //Map<String, String> map = mapper.readValue(json, new TypeReference<Map<String, String>>() {});
-
-        System.out.println(map);
-
         return map;
     }
 
     private Response response(HttpServletRequest req) throws Exception {
         String json = mapperObject(req);
-        return new Gson().fromJson(json, Response.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        Response response;
+        response = objectMapper.readValue(json, Response.class);
+        return response;
     }
 }

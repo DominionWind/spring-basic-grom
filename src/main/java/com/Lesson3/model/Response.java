@@ -1,4 +1,4 @@
-package com.model;
+package com.Lesson3.model;
 
 public class Response {
     private File file;

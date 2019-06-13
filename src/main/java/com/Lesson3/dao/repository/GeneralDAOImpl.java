@@ -1,7 +1,7 @@
-package com.dao.repository;
+package com.Lesson3.dao.repository;
 
-import com.dao.interfeise.GeneralDAO;
-import com.exeptions.InternalExeption;
+import com.Lesson3.dao.interfeise.GeneralDAO;
+import com.Lesson3.exeptions.InternalExeption;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
