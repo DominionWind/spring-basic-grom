@@ -1,7 +1,5 @@
 package com.Lesson3.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -19,32 +17,27 @@ public class File {
     @SequenceGenerator(name = "ITEM_S", sequenceName = "ITEM_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ITEM_S")
     @Column(name = "ID")
-    @JsonProperty("id")
     public long getId() {
         return id;
     }
 
     @Column(name = "NAME")
-    @JsonProperty("name")
     public String getName() {
         return name;
     }
 
     @Column(name = "FORMAT")
-    @JsonProperty("format")
     public String getFormat() {
         return format;
     }
 
     @Column(name = "FILE_SIZE")
-    @JsonProperty("size")
     public long getSize() {
         return size;
     }
 
     @ManyToOne
     @JoinColumn(name = "STORAGE_ID", nullable = false)
-    @JsonProperty("storage")
     public Storage getStorage() {
         return storage;
     }

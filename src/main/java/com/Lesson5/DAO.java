@@ -17,17 +17,4 @@ public class DAO {
         entityManager.persist(item);
         return item;
     }
-
-    public Item update(Item item){
-        entityManager.merge(item);
-        return item;
-    }
-
-    public void delete(Long id){
-        entityManager.remove(getById(id));
-    }
-
-    public Item getById(Long id){
-        return entityManager.find(Item.class, id);
-    }
 }
