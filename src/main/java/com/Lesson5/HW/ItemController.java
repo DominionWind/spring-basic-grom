@@ -18,8 +18,14 @@ public class ItemController {
     private DAO dao;
 
     @Autowired
-    public ItemController(DAO dao){
+    public ItemController(DAO dao) {
         this.dao = dao;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/hi", produces = "text/plain")
+    public @ResponseBody
+    String printTestMessage() {
+        return "test";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/item/save", produces = "text/plain")
@@ -31,7 +37,7 @@ public class ItemController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/item/delete", produces = "text/plain")
     public @ResponseBody
-    void deleteItem(@RequestParam(value = "id") Long id) throws IOException {
+    void deleteItem(@RequestParam(value = "id") Long id){
         dao.delete(id);
     }
 
