@@ -8,7 +8,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
-public class DispatcherConfig implements WebApplicationInitializer {
+public class DispatcherConfigGrom implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext container) {
         AnnotationConfigWebApplicationContext rootContext
@@ -19,9 +19,9 @@ public class DispatcherConfig implements WebApplicationInitializer {
 
         AnnotationConfigWebApplicationContext dispatcherContext
                 = new AnnotationConfigWebApplicationContext();
-        dispatcherContext.register(WebApp.class);
+        dispatcherContext.register(AppConfig.class);
         ServletRegistration.Dynamic dispatcher =
-                container.addServlet("dispatcher",
+                container.addServlet("dispatcherGrom",
                         new DispatcherServlet(dispatcherContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
